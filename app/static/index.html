@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>NATS+Python Example Project</title>
+
+</head>
+<body>
+<h1>Nats Subscription Table</h1>
+
+<form name="subscribe" method="post">
+    <input type="string" name="subject" value="subject"/>
+    <input type="submit" value="subscribe" />
+</form>
+
+<form name="publish" method="post">
+    <input type="string" name="subject" value="subject"/>
+    <input type="string" name="message" value="testing"/>
+    <input type="submit" value="publish" />
+</form>
+
+<table>
+    <tr>
+        <th>Subject</th>
+        <th>Last Message Received</th>
+        <th>Number of Messages Received</th>
+        <th><a href="/pigeon/">Refresh</a> </th>
+    </tr>
+
+
+    <!--        <p>{{nats_messages.items()}}</p>-->
+    {% for k, nm in nats_messages.items() %}
+    <tr>
+        <td>{{ nm.subject }}</td>
+        <td>{{ nm.msg }}</td>
+        <td>{{ nm.subscription_count }}</td>
+    </tr>
+
+    {% endfor %}
+</table>
+
+</body>
+</html>
