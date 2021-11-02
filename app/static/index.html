@@ -2,41 +2,74 @@
 <html>
 <head>
     <title>NATS+Python Example Project</title>
+    <style>
+        body {
+            box-sizing: border-box;
+            margin: 0px;
+            height: 100%;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .formz {
+            display: flex;
+            flex-direction: horizontal;
+            justify-content: center;
+            align-items: center;
 
+            width: 65%;
+            justify-content: center;
+            border: 0.25vw solid grey;
+            background-image: linear-gradient(to bottom right, rgba(0,0,0, 0.4), #65CCB8, grey);
+        }
+        form {
+            margin: 5% 5% 5% 5%;
+        }
+        table {
+            margin-top: 5%; width: 90%; border: 0.25vw solid cyan; border-collapse: separate; border-spacing: 0px;
+        }
+
+    </style>
 </head>
 <body>
-<h1>Nats Subscription Table</h1>
 
-<form name="subscribe" method="post">
-    <input type="string" name="subject" value="subject"/>
-    <input type="submit" value="subscribe" />
-</form>
+<div class="container">
+    <h1>NATS Subscription Table</h1>
+    <div class="formz">
+        <form name="subscribe" method="post">
+            <input type="string" name="subject" value="subject"/>
+            <input type="submit" value="subscribe"/>
+        </form>
 
-<form name="publish" method="post">
-    <input type="string" name="subject" value="subject"/>
-    <input type="string" name="message" value="testing"/>
-    <input type="submit" value="publish" />
-</form>
+        <form name="publish" method="post">
+            <input type="string" name="subject" value="subject"/>
+            <input type="string" name="message" value="testing"/>
+            <input type="submit" value="publish"/>
+        </form>
+    </div>
 
-<table>
-    <tr>
-        <th>Subject</th>
-        <th>Last Message Received</th>
-        <th>Number of Messages Received</th>
-        <th><a href="/pigeon/">Refresh</a> </th>
-    </tr>
+    <table>
+        <thead>
+        <tr>
+            <th>Subject</th>
+            <th>Last Message Received</th>
+            <th>Number of Messages Received</th>
+            <th><a href="/pigeon/">Refresh</a></th>
+        </tr>
+        </thead>
 
 
-    <!--        <p>{{nats_messages.items()}}</p>-->
-    {% for k, nm in nats_messages.items() %}
-    <tr>
-        <td>{{ nm.subject }}</td>
-        <td>{{ nm.msg }}</td>
-        <td>{{ nm.subscription_count }}</td>
-    </tr>
-
-    {% endfor %}
-</table>
-
+        {% for k, nm in nats_messages.items() %}
+        <tr>
+            <td>{{ nm.subject }}</td>
+            <td>{{ nm.msg }}</td>
+            <td>{{ nm.subscription_count }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
 </body>
 </html>
