@@ -1,42 +1,52 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <title>NATS+Python Example Project</title>
-
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/x-icon" href="favicon.ico"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Python web application using FastAPI and NATS messaging system.">
 </head>
 <body>
-<h1>Nats Subscription Table</h1>
 
-<form name="subscribe" method="post">
-    <input type="string" name="subject" value="subject"/>
-    <input type="submit" value="subscribe" />
-</form>
+<div class="container">
+    <h1>NATS Subscription Table</h1>
+    <div class="formz">
+        <form name="subscribe" method="post">
+            <label for="sub_sub">Subject: </label>
+            <input id="sub_sub" type="string" name="subject" value="subject"/>
+            <input type="submit" value="subscribe"/>
+        </form>
 
-<form name="publish" method="post">
-    <input type="string" name="subject" value="subject"/>
-    <input type="string" name="message" value="testing"/>
-    <input type="submit" value="publish" />
-</form>
+        <form name="publish" method="post">
+            <label for="pub_sub">Subject: </label>
+            <input id="pub_sub" type="string" name="subject" value="subject"/>
+            <label for="message">Message: </label>
+            <input id="message" type="string" name="message" value="testing"/>
 
-<table>
-    <tr>
-        <th>Subject</th>
-        <th>Last Message Received</th>
-        <th>Number of Messages Received</th>
-        <th><a href="/pigeon/">Refresh</a> </th>
-    </tr>
+            <input type="submit" value="publish"/>
+        </form>
+    </div>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Subject</th>
+            <th>Last Message Received</th>
+            <th>Number of Messages Received</th>
+            <th><a href="/pigeon/">Refresh</a></th>
+        </tr>
+        </thead>
 
 
-    <!--        <p>{{nats_messages.items()}}</p>-->
-    {% for k, nm in nats_messages.items() %}
-    <tr>
-        <td>{{ nm.subject }}</td>
-        <td>{{ nm.msg }}</td>
-        <td>{{ nm.subscription_count }}</td>
-    </tr>
-
-    {% endfor %}
-</table>
-
+        {% for k, nm in nats_messages.items() %}
+        <tr>
+            <td>{{ nm.subject }}</td>
+            <td>{{ nm.msg }}</td>
+            <td style="padding-left: 6vw;">{{ nm.subscription_count }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
 </body>
 </html>

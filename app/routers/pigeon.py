@@ -7,6 +7,7 @@ from typing import Dict
 import nats
 from fastapi import APIRouter, Request
 from starlette.datastructures import FormData
+from starlette.responses import FileResponse
 from starlette.templating import Jinja2Templates
 
 from app.entity import NatsMessage
@@ -63,6 +64,16 @@ async def _nats_pub(subject: str, msg: str):
     nc = await nats.connect(servers=["nats://localhost:4222"])
     loop = asyncio.get_event_loop()
     loop.create_task(_publish(nc, subject, msg))
+
+
+@router.get('/favicon.ico', include_in_schema=False)
+async def favicon():
+    return FileResponse(f"{BASE_PATH}/static/favicon.ico")
+
+
+@router.get('/styles.css', include_in_schema=False)
+async def css():
+    return FileResponse(f"{BASE_PATH}/static/styles.css")
 
 
 @router.get("/")
