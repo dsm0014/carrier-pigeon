@@ -71,7 +71,7 @@ async def favicon():
     return FileResponse(f"{BASE_PATH}/static/favicon.ico")
 
 
-@router.get('/styles.css')
+@router.get('/styles.css', include_in_schema=False)
 async def css():
     return FileResponse(f"{BASE_PATH}/static/styles.css")
 
