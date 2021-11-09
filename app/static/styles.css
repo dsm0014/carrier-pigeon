@@ -14,7 +14,7 @@ body {
 }
 .formz {
     display: flex;
-    flex-direction: horizontal;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 
@@ -34,7 +34,7 @@ table {
     background-image: linear-gradient(to bottom right, rgba(0,0,0, 0.4), #65CCB8, grey);
 }
 th {
-    font-size: 2vw;
+    font-size: 5vw;
 }
 td {
     margin: 4vw;
@@ -42,4 +42,10 @@ td {
 }
 
 /* Desktop view */
-/* @media only screen and (min-width: 768px) { */
+@media only screen and (min-width: 640px) {
+
+    th {
+        font-size: 2vw;
+    }
+
+}
