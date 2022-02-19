@@ -31,7 +31,7 @@ async def _message_handler(msg):
         data = json.loads(data)
         msg = data['msg']
     except TypeError as t:
-        logging.error(f"NATS Message does not contain 'msg'")
+        logging.error(f"ERROR: NATS Message does not contain 'msg'")
         return
 
     logging.info(f"Received a message on subject: '{subject}' containing: {data}")
@@ -55,12 +55,18 @@ async def _publish(nc, subject, msg):
 
 
 async def _nats_sub(subject: str):
+    if ' ' in subject:
+        logging.error("ERROR: nats subject must not contain spaces")
+        return
     nc = await nats.connect(servers=["nats://localhost:4222"])
     loop = asyncio.get_event_loop()
     loop.create_task(_subscribe(nc, subject))
 
 
 async def _nats_pub(subject: str, msg: str):
+    if ' ' in subject:
+        logging.error("ERROR: nats subject must not contain spaces")
+        return
     nc = await nats.connect(servers=["nats://localhost:4222"])
     loop = asyncio.get_event_loop()
     loop.create_task(_publish(nc, subject, msg))
@@ -94,7 +100,7 @@ async def _process_forms(f: FormData):
     sub = f.get('subject', '').strip()
     msg = f.get('message', '').strip()
     if not sub:
-        logging.error('No subject provided')
+        logging.error('ERROR: No subject provided')
     if msg:
         await _nats_pub(sub, msg)
     else:
