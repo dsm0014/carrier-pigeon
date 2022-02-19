@@ -28,7 +28,7 @@ jobs:
       run: poetry run pytest
 
     - name: Store Application Version
-      run: echo ::set-output name=APP_VERSION::$(poetry version)
+      run: echo ::set-output name=APP_VERSION::$(poetry version -s)
       id: poetry_project
 
     - name: Set up Docker Buildx
