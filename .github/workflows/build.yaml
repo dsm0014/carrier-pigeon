@@ -3,7 +3,7 @@ name: Carrier Pigeon Build
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   build:
