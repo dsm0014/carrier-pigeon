@@ -1,6 +1,9 @@
 # carrier-pigeon
 A demo project showing a simple implementation of NATS using python and FastAPI.
 
+carrier-pigeon within the dsm-portfolio architecture:
+![dsm0014-digital-ocean-kubernetes-architecture](/docs/dsm22-end-user-diagram.png?raw=true "Digital Ocean Architecture")
+
 # Setup
 Ensure the following are setup and installed
  - python (version 3.9 or later)
